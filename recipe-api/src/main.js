@@ -67,8 +67,8 @@ function renderResults(recipes) {
 }
 
 function openRecipe(recipe) {
-  const ingredients = arrayToString(recipe.sections[0].components);
-  const instuctions = arrayToString(recipe.instuctions);
+  const ingredients = ingredientsToHTML(recipe.sections[0].components);
+  const instuctions = instructionsToHTML(recipe.instuctions);
 
   results.textContent = `
   <div id="selected-recipe">
@@ -91,14 +91,27 @@ function openRecipe(recipe) {
 
 // https://rapidapi.com/apidojo/api/tasty/playground/apiendpoint_abf1bbc2-d08d-462b-b733-17392192ca46
 
-function arrayToString(array) {
-  let htmlText = "";
-  for (let index = 0; index < array.length; index++) {
-    if (array.raw_text) {
+function ingredientsToHTML(ingredients) {
+  let htmlText = `<ul>`;
+  for (let index = 0; index < ingredients.length; index++) {
+    if (ingredients.raw_text) {
       if (raw_text === "") {
         //.....
       }
       //...
     }
+    htmlText += `
+      </
+    `;
+  }
+}
+
+function instructionsToHTML(instructions) {
+  let htmlText = "<ul>";
+  for (let index = 0; index < ingredients.length; index++) {
+    htmlText += `
+    <li>
+      
+    `;
   }
 }
