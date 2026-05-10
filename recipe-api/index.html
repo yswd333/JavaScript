@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://t4.ftcdn.net/jpg/16/82/81/49/360_F_1682814986_h66AfZ30r5DQ0AdInAuPX8ioRKygnnJs.jpg"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cook Book - by Tasty</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="title">
+        <h1>Cook Book</h1>
+        <h4>by Tasty</h4>
+      </div>
+      <form id="search">
+        <input id="searchInput" type="text" placeholder="search for a recipe" />
+        <button>search</button>
+      </form>
+      <div class="add-recipe">
+        <a href="">My Recipes</a>
+      </div>
+    </header>
+    <div class="recipe-cards-container" id="recipeCardsContainer">
+      <div id="status"></div>
+      <div id="results"></div>
+      <!-- 
+            name
+            nutrition (array)
+             num_servings
+             total cook time
+             thumbnail_url
+             user_ratings
+             instructions
+             description
+             sections[0].components[].ingredient
+             sections[0].components[].raw_text
+
+             if raw text === "n/a": 
+                sections[0].components[].ingredient.name
+                sections[0].components[].measurements[0].unit.abbreviation
+                sections[0].components[].measurements[0].quantity
+      -->
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

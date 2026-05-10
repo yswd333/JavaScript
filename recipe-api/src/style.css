@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px darkolivegreen;
+  padding: 20px;
+}
+
+.title {
+  text-align: end;
+}
+
+#search input {
+  padding: 7px 7px;
+  margin: 5px;
+  width: 250px;
+}
+
+#search button {
+  padding: 7px 7px;
+}
+
+.card {
+  display: flex;
+  margin: 20px;
+  gap: 10px;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  height: 200px;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow:
+    rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px 0 0 10px;
+  object-fit: cover;
+}
+
+.recipe-info {
+  display: flex;
+  flex-direction: column;
+  padding-right: 5px;
+  padding: 5px 5px 5px 0;
+}
+
+.cook-time {
+  margin: 5px 0;
+  font-size: 13px;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 7; /* 11. Adjust based on available vertical space */
+  line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden; /* 12. Cuts off the extra text */
+}
