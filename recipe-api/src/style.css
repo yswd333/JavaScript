@@ -75,3 +75,9 @@ header {
   -webkit-box-orient: vertical;
   overflow: hidden; /* 12. Cuts off the extra text */
 }
+
+#gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
