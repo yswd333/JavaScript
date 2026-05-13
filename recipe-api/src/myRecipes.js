@@ -198,6 +198,8 @@ const myRecipes = [
 
 let nextId = 11;
 
+const recipeForm = document.getElementById("recipe-form");
+const resetBtn = document.getElementById("reset-btn");
 const status = document.getElementById("status");
 const results = document.getElementById("results");
 const recipeCardsContainer = document.getElementById("recipe-cards-container");
@@ -232,22 +234,20 @@ function addRecipe() {
                 placeholder="Enter a short description about your recipe"
               />
               <label for="ingredients">ingredients:</label>
-              <input
-                type="text"
-                id="ingredients"
-              />
+              <textarea
+                id="ingredients" placeholder="Enter ingredients (one per line)">
+              </textarea>
               <label for="instructions">instructions:</label>
-              <input
-                type="text"
-                id="instructions"
-              />
+              <textarea
+                id="instructions" placeholder="Enter instructions (one per line)">
+              </textarea>
               
             </div>
             <div class="field field-small">
               <label for="prepTime">prep Time: </label>
               <input
                 type="number"
-                id="age"
+                id="prepTime"
                 min="1"
               />
               <label for="prepTime">minutes</label>
@@ -255,18 +255,25 @@ function addRecipe() {
           </div>
           <div class="form-buttons">
             <button type="submit" id="submit-btn">Add Recipe</button>
-            <button type="button" id="cancel-btn">Cancel</button>
             <button type="reset" id="reset-btn">Reset</button>
           </div>
         </form>
       </div>`;
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    let name = name.value;
-    let description = description.value;
-    let ingredients = ingredients.value;
-    let instructions = instructions.value;
-    let prepTime = Number(prepTime.value);
+    let name = document.getElementById("name").value;
+    let description = document.getElementById("description").value;
+    let ingredients = document
+      .getElementById("ingredients")
+      .value.split("\n")
+      .map((i) => i.trim())
+      .filter(Boolean);
+    let instructions = document
+      .getElementById("instructions")
+      .value.split("\n")
+      .map((i) => i.trim())
+      .filter(Boolean);
+    let prepTime = Number(document.getElementById("prepTime").value);
     let newRecipe = {
       id: nextId,
       name: name,
@@ -277,6 +284,8 @@ function addRecipe() {
     };
     myRecipes.push(newRecipe);
     nextId++;
+    renderResults(myRecipes);
+    recipeCard.textContent = "";
   });
   results.appendChild(back);
   results.appendChild(form);
@@ -298,6 +307,9 @@ function renderResults(myRecipesData) {
     const card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML = `
+    <button class="delete-btn" aria-label="Delete recipe">
+    <i class="fa-solid fa-trash"></i>
+    </button>
       <div class="recipe-info">
         <div class="recipe-title"><h2>${recipe.name}</h2></div>
         <div class="details">
@@ -306,17 +318,27 @@ function renderResults(myRecipesData) {
         </div>
     </div>
     `;
+    const deleteBtn = card.querySelector(".delete-btn");
+
+    deleteBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      console.log("clicked delete", recipe.id);
+      myRecipesData = myRecipesData.filter((r) => r.id !== recipe.id);
+      renderResults(myRecipesData);
+    });
     card.addEventListener("click", () => {
       results.textContent = "";
       //results.classList.add("hidden");
       console.log(recipe);
       openRecipe(recipe);
     });
-    const renderbtn = document.getElementById("renderAddBtn");
-    renderbtn.addEventListener("click", () => addRecipe());
     gridContainer.appendChild(card);
     results.appendChild(gridContainer);
   });
+
+  const renderbtn = document.getElementById("renderAddBtn");
+  renderbtn.addEventListener("click", () => addRecipe());
 }
 
 function openRecipe(recipe) {
